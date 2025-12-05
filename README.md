@@ -127,6 +127,3 @@ Mọi đóng góp đều được hoan nghênh. Vui lòng tạo Pull Request ho�
 Distributed under the MIT License. See LICENSE.txt for more information.
 
 Copyright (c) 2025 Pham Tung Lam
-
-```
-```
