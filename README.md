@@ -1,3 +1,6 @@
+
+---
+
 # 🏠 House Price Prediction System (AIO2025)
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
@@ -5,125 +8,154 @@
 ![Gradio](https://img.shields.io/badge/Gradio-4.0-orange)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3-yellow)
 
-Một hệ thống **End-to-End Machine Learning** hoàn chỉnh cho bài toán dự đoán giá nhà. Dự án tích hợp quy trình từ Khám phá dữ liệu (EDA), Tiền xử lý nâng cao, Huấn luyện mô hình đến Giao diện dự đoán tương tác trên Web.
+An **end-to-end Machine Learning system** for house price prediction.
+The project covers the full pipeline from **Exploratory Data Analysis (EDA)** and **advanced preprocessing** to **model training** and an **interactive web-based prediction interface**.
 
-Dự án được xây dựng dựa trên các yêu cầu và bài tập từ tài liệu **AIO2025**, mở rộng với kiến trúc FastAPI + Gradio.
-
----
-
-## ✨ Tính năng chính
-
-* **📂 Upload & Phân tích tự động:** Hỗ trợ tải file CSV, tự động phân tích và hiển thị biểu đồ EDA (Phân phối, Missing Values, Heatmap).
-* **🧠 Pipeline Huấn luyện Nâng cao:**
-    * Tự động xử lý dữ liệu thiếu bằng **KNN Imputer**.
-    * Chuẩn hóa dữ liệu chống ngoại lai bằng **Robust Scaler**.
-    * Xử lý biến thiên lệch (Skewed Target) bằng **Log Transformation**.
-    * Tự động tạo đặc trưng phi tuyến với **Polynomial Features**.
-* **🚀 Đa mô hình:** Huấn luyện song song 3 mô hình: **Linear Regression**, **Ridge**, **Lasso**.
-* **🔮 Giao diện Dự đoán:** Nhập liệu trực quan thông qua Web UI để dự đoán giá nhà theo thời gian thực.
-* **💾 Quản lý Mô hình:** Tự động lưu mô hình sau khi huấn luyện, hỗ trợ xóa/reset mô hình cũ.
+This project is built based on requirements and exercises from the **AIO2025** materials, and extended with a **FastAPI + Gradio** architecture.
 
 ---
 
-## 🛠️ Cài đặt & Chạy dự án
+## ✨ Key Features
 
-### 1. Yêu cầu tiên quyết
-* Python 3.8 trở lên.
-* Git.
+* **📂 Upload & Automated Analysis:**
+  Supports CSV file upload with automatic EDA visualization (distributions, missing values, correlation heatmaps).
 
-### 2. Cài đặt
-Mở terminal và thực hiện các bước sau:
+* **🧠 Advanced Training Pipeline:**
+
+  * Automatic missing value handling using **KNN Imputer**.
+  * Outlier-robust normalization with **Robust Scaler**.
+  * Skewed target handling via **Log Transformation**.
+  * Automatic nonlinear feature generation using **Polynomial Features**.
+
+* **🚀 Multi-Model Training:**
+  Trains three models in parallel: **Linear Regression**, **Ridge**, and **Lasso**.
+
+* **🔮 Prediction Interface:**
+  Intuitive web UI for real-time house price prediction.
+
+* **💾 Model Management:**
+  Automatically saves trained models and supports deleting/resetting old models.
+
+---
+
+## 🛠️ Installation & Running the Project
+
+### 1. Prerequisites
+
+* Python 3.8 or later
+* Git
+
+### 2. Installation
+
+Open a terminal and follow these steps:
 
 ```bash
-# Clone dự án (nếu bạn dùng git)
+# Clone the repository (if using Git)
 git clone https://github.com/pahmlam/house_price_prediction.git
 cd house-price-prediction
 
-# Tạo môi trường ảo (Khuyến nghị)
+# Create a virtual environment (recommended)
 python -m venv venv
 
-# Kích hoạt môi trường ảo
+# Activate the virtual environment
 # Windows:
 venv\Scripts\activate
-# Mac/Linux:
+# macOS/Linux:
 source venv/bin/activate
 
-# Cài đặt thư viện
+# Install dependencies
 pip install -r requirements.txt
-````
+```
 
-### 3\. Khởi chạy ứng dụng
+### 3. Launch the Application
 
 ```bash
 python main.py
 ```
 
-Sau khi chạy, truy cập trình duyệt tại địa chỉ: `http://localhost:8000`
+After launching, open your browser and navigate to:
+`http://localhost:8000`
 
------
+---
 
-## 📊 Phương pháp & Thuật toán
+## 📊 Methods & Algorithms
 
-Hệ thống áp dụng các kỹ thuật nâng cao để tối ưu hóa độ chính xác (RMSE/R2 Score) so với phương pháp cơ bản:
+The system applies several advanced techniques to improve prediction accuracy (RMSE / R²) compared to baseline approaches:
 
-1.  **Xử lý dữ liệu thiếu (Imputation):** Sử dụng `KNNImputer` (K-Nearest Neighbors) thay vì điền trung bình (Mean), giúp giữ nguyên cấu trúc phân phối của dữ liệu.
-2.  **Chuẩn hóa (Scaling):** Sử dụng `RobustScaler` dựa trên phân vị (Quantile) để giảm thiểu tác động của các giá trị ngoại lai (Outliers) thường gặp trong dữ liệu bất động sản.
-3.  **Biến đổi biến mục tiêu (Target Transform):** Áp dụng `np.log1p` lên giá nhà (`SalePrice`) để đưa phân phối về dạng chuẩn (Normal Distribution), giúp các mô hình tuyến tính hoạt động hiệu quả hơn.
-4.  **Feature Engineering:** Tạo các đặc trưng bậc 2 (`PolynomialFeatures degree=2`) để mô hình học được các mối quan hệ phi tuyến tính.
+1. **Missing Value Imputation:**
+   Uses `KNNImputer` (K-Nearest Neighbors) instead of mean imputation, preserving the underlying data distribution.
 
------
+2. **Feature Scaling:**
+   Applies `RobustScaler` based on quantiles to reduce the impact of outliers, which are common in real estate data.
 
-## 📂 Cấu trúc dự án
+3. **Target Transformation:**
+   Applies `np.log1p` to the house price (`SalePrice`) to approximate a normal distribution, improving the performance of linear models.
+
+4. **Feature Engineering:**
+   Generates second-order features using `PolynomialFeatures (degree=2)` to capture nonlinear relationships.
+
+---
+
+## 📂 Project Structure
 
 ```text
 house_price_system/
-├── data/                  # Thư mục chứa dữ liệu mẫu (nếu có)
-├── models/                # Nơi lưu trữ các file mô hình (.pkl) sau khi train
-├── static_images/         # Thư mục chứa ảnh biểu đồ EDA tạm thời
-├── core.py                # Xử lý Logic chính: EDA, Preprocessing, Training
-├── main.py                # App Server: FastAPI config & Gradio UI
-├── requirements.txt       # Danh sách thư viện phụ thuộc
-├── .gitignore             # File cấu hình bỏ qua của Git
-└── README.md              # Tài liệu hướng dẫn
+├── data/                  # Sample datasets (if any)
+├── models/                # Stored trained models (.pkl files)
+├── static_images/         # Temporary storage for EDA plots
+├── core.py                # Core logic: EDA, preprocessing, training
+├── main.py                # App server: FastAPI config & Gradio UI
+├── requirements.txt       # Dependency list
+├── .gitignore             # Git ignore configuration
+└── README.md              # Project documentation
 ```
 
------
+---
 
-## 📸 Hướng dẫn sử dụng
+## 📸 Usage Guide
 
-### Bước 1: Huấn luyện (Tab 1)
+### Step 1: Training (Tab 1)
 
-1.  Tải file dữ liệu `train.csv` lên hệ thống.
-2.  Nhấn nút **"Tải lên & Phân tích EDA"** để xem biểu đồ dữ liệu.
-3.  Nhấn nút **"Huấn luyện 3 Mô hình"**. Hệ thống sẽ chạy Pipeline và trả về kết quả RMSE/R2.
+1. Upload the `train.csv` dataset.
+2. Click **“Upload & Analyze EDA”** to view data visualizations.
+3. Click **“Train 3 Models”**.
+   The system runs the full pipeline and returns RMSE / R² results.
 
-### Bước 2: Dự đoán (Tab 2)
+### Step 2: Prediction (Tab 2)
 
-1.  Chuyển sang tab **"Dự đoán giá nhà"**.
-2.  Chọn loại mô hình muốn sử dụng (Linear, Ridge, hoặc Lasso).
-3.  Nhập các thông số của ngôi nhà (Diện tích, Năm xây, Số phòng...).
-4.  Nhấn **"Dự đoán ngay"** để xem giá trị ước tính.
+1. Switch to the **“House Price Prediction”** tab.
+2. Select the model to use (Linear, Ridge, or Lasso).
+3. Enter house attributes (Area, Year Built, Number of Rooms, etc.).
+4. Click **“Predict Now”** to view the estimated price.
 
------
+---
 
-## ⚠️ Khắc phục sự cố thường gặp
+## ⚠️ Common Troubleshooting
 
-**Lỗi: `ValueError: Path too long` trên Windows**
+### Error: `ValueError: Path too long` on Windows
 
-  * Dự án đã được xử lý để khắc phục lỗi này bằng cách lưu ảnh vào thư mục `static_images` thay vì encode Base64. Tuy nhiên, nếu vẫn gặp lỗi liên quan đến file hệ thống, hãy đảm bảo thư mục dự án không nằm quá sâu (Ví dụ: nên để ở `C:\Projects\HousePrice`).
+* This issue is mitigated by saving plots to the `static_images` directory instead of encoding them in Base64.
+  If the error persists, ensure that the project directory path is not too deep
+  (e.g., place it under `C:\Projects\HousePrice`).
 
-**Lỗi: `Mô hình chưa được huấn luyện`**
+### Error: `Model has not been trained`
 
-  * Bạn cần quay lại Tab 1 và nhấn nút Huấn luyện trước khi thực hiện dự đoán.
+* Return to **Tab 1** and train the models before attempting prediction.
 
------
+---
 
-## 🤝 Đóng góp
+## 🤝 Contributing
 
-Mọi đóng góp đều được hoan nghênh. Vui lòng tạo Pull Request hoặc mở Issue nếu bạn tìm thấy lỗi.
+Contributions are welcome!
+Please submit a Pull Request or open an Issue if you find a bug or have suggestions.
+
+---
 
 ## 📜 License
 
-Distributed under the MIT License. See LICENSE.txt for more information.
+Distributed under the **MIT License**. See `LICENSE.txt` for more information.
 
-Copyright (c) 2025 Pham Tung Lam
+Copyright © 2025 **Pham Tung Lam**
+
+---
+
